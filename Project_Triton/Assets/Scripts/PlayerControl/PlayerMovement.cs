@@ -6,21 +6,34 @@ public class PlayerMovement : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////Refrences////////////////////////////////////////////////////////////////////
     Rigidbody rb;
-
+    PlayerInput playerInput;
+    InputAction moveAction;
 
     [Header("Refrences")]
-    [SerializeField] public PlayerInput playerInput;
-    [SerializeField] float moveSpeed;
     public Transform orientation;
 
 
+    ////////////////////////////////////////////////////////////////Player Atributes////////////////////////////////////////////////////////////////////
+
+    [Header("Player Atributes")]
+    [SerializeField] float directionControl = 8;
+    [SerializeField] float moveSpeed;
+
+
     ////////////////////////////////////////////////////////////////Technical Variables////////////////////////////////////////////////////////////////////
+
+    //Input
     float horizontalInput;
     float verticalInput;
 
+    //Movement directrion
     Vector3 moveDirection;
     Vector3 yRot;
-    InputAction moveAction;
+
+    // Movement acceleration
+    float AdjustmentAmt = 1; //the amount added to our player acceleration, this is used for adjusting to new speeds such as when we slide
+    Vector3 lerpVelocityOfMovement;
+
 
 
 
@@ -62,7 +75,11 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection.y = rb.linearVelocity.y;
 
-        rb.linearVelocity = moveDirection;
+
+        float Acceleration = directionControl * AdjustmentAmt;
+        lerpVelocityOfMovement = Vector3.Lerp(rb.linearVelocity, moveDirection, Acceleration * Time.fixedDeltaTime);
+
+        rb.linearVelocity = lerpVelocityOfMovement;
 
     }
 
@@ -71,8 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Debug.DrawRay(orientation.position, moveDirection, Color.red);
-
+        Debug.DrawRay(orientation.position, lerpVelocityOfMovement, Color.red);
     }
 
 
