@@ -681,8 +681,10 @@ GameObject:
   - component: {fileID: 200318590}
   - component: {fileID: 200318589}
   - component: {fileID: 200318588}
+  - component: {fileID: 200318595}
   - component: {fileID: 200318587}
   - component: {fileID: 200318592}
+  - component: {fileID: 200318594}
   m_Layer: 0
   m_Name: PlayerMain
   m_TagString: Untagged
@@ -859,9 +861,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d45a6fdd6f1574980b0e9f26a3b8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
-  moveSpeed: 1
   orientation: {fileID: 452211978}
+  directionControl: 8
+  moveSpeed: 5
 --- !u!54 &200318593
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -889,6 +891,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &200318594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200318584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ffb63002a5f4b4787c01e3e99fccec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &200318595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200318584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59400b4030548149bfc66d94d7c7879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereYPos: -0.45
+  sphereRadius: 0.29
+  FloorLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &452211976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,7 +1389,7 @@ GameObject:
   - component: {fileID: 639732703}
   - component: {fileID: 639732702}
   - component: {fileID: 639732701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2453,7 +2484,7 @@ GameObject:
   - component: {fileID: 934563688}
   - component: {fileID: 934563687}
   - component: {fileID: 934563686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5276,7 +5307,7 @@ GameObject:
   - component: {fileID: 1999255707}
   - component: {fileID: 1999255706}
   - component: {fileID: 1999255705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
