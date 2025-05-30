@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
 
     Vector3 moveDirection;
-
+    Vector3 yRot;
     InputAction moveAction;
 
 
@@ -42,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        verticalInput = moveAction.ReadValue<Vector2>().y;
+        horizontalInput = moveAction.ReadValue<Vector2>().x;
+
         MovePlayer();
     }
 
@@ -49,18 +52,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // Where does the camera look on y-axis?
-        Vector3 yRot = orientation.transform.localEulerAngles;
-        //transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, yRot.y, transform.localEulerAngles.z);
 
-        moveDirection = (orientation.forward * moveAction.ReadValue<Vector2>().y) + (orientation.right * moveAction.ReadValue<Vector2>().x);
+        yRot = new Vector3(orientation.forward.x, 0, orientation.forward.z);
+        yRot = yRot.normalized;
+
+        moveDirection = (yRot * verticalInput) + (orientation.right * horizontalInput);
 
         moveDirection = moveDirection * moveSpeed;
 
         moveDirection.y = rb.linearVelocity.y;
 
-        rb.AddForce(moveDirection, ForceMode.VelocityChange);
-
+        rb.linearVelocity = moveDirection;
 
     }
 
