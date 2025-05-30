@@ -863,6 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 452211978}
   directionControl: 8
+  inAirControl: 1
   moveSpeed: 5
 --- !u!54 &200318593
 Rigidbody:
@@ -903,6 +904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ffb63002a5f4b4787c01e3e99fccec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpHeight: 3
 --- !u!114 &200318595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,7 +917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59400b4030548149bfc66d94d7c7879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereYPos: -0.45
+  currentState: 0
+  sphereYPos: -0.35
   sphereRadius: 0.29
   FloorLayers:
     serializedVersion: 2
