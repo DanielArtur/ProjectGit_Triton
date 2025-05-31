@@ -20,8 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Atributes")]
     [SerializeField] float directionControl = 8;
     [SerializeField] float inAirControl = 3;
-    [SerializeField] float moveSpeed;
-
+    [SerializeField] float defaultMoveSpeed;
+    [Tooltip("Speed when you move along the wall")]
+    [SerializeField] float onWallSpeed;
 
     ////////////////////////////////////////////////////////////////Technical Variables////////////////////////////////////////////////////////////////////
 
@@ -32,11 +33,12 @@ public class PlayerMovement : MonoBehaviour
     //Movement directrion
     Vector3 moveDirection;
     Vector3 yRot;
+    Vector3 point;
 
     // Movement acceleration
     float AdjustmentAmt = 1; //the amount added to our player acceleration, this is used for adjusting to new speeds such as when we slide
     Vector3 lerpVelocityOfMovement;
-
+    float currentmoveSpeed;
 
 
 
@@ -49,6 +51,9 @@ public class PlayerMovement : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         stateChecker = GetComponent<PlayerStateChecker>();
+
+
+        currentmoveSpeed = defaultMoveSpeed;
     }
 
 
@@ -79,12 +84,37 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
 
+
+
+
         yRot = new Vector3(orientation.forward.x, 0, orientation.forward.z);
         yRot = yRot.normalized;
 
         moveDirection = (yRot * verticalInput) + (orientation.right * horizontalInput);
 
-        moveDirection = moveDirection * moveSpeed;
+        if (stateChecker.nearWall && moveDirection.magnitude > 0)
+        {
+
+            point = stateChecker.ContactPoint.normal;
+
+            float wallAngle = Vector3.Angle(moveDirection, point);
+
+            if (-90 > wallAngle || wallAngle > 90)
+            {
+
+                moveDirection = Vector3.ProjectOnPlane(moveDirection, point).normalized;
+                Debug.Log("Project on plane");
+
+
+                currentmoveSpeed = onWallSpeed;
+            }
+
+            // Debug.Log("Angle:" + wallAngle);
+
+        }
+
+
+        moveDirection = moveDirection * currentmoveSpeed;
 
         moveDirection.y = rb.linearVelocity.y;
 
@@ -104,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection = (yRot * verticalInput) + (orientation.right * horizontalInput);
 
-        moveDirection = moveDirection * moveSpeed;
+        moveDirection = moveDirection * defaultMoveSpeed;
 
         moveDirection.y = rb.linearVelocity.y;
 
@@ -120,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Debug.DrawRay(orientation.position, lerpVelocityOfMovement, Color.red);
+        Debug.DrawRay(transform.position, point, Color.blue);
     }
 
 
