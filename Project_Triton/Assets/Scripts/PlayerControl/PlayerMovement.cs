@@ -115,7 +115,6 @@ public class PlayerMovement : MonoBehaviour
             {
 
                 moveDirection = Vector3.ProjectOnPlane(moveDirection, point).normalized;
-                Debug.Log("Project on plane");
 
 
                 currentmoveSpeed = onWallSpeed;

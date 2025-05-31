@@ -72,19 +72,11 @@ public class PlayerStateChecker : MonoBehaviour
             currentState = PlayerStates.InAir;
         }
 
-        // Check if we are close to an obstacle that we have to move along
-        // nearWall = WallCheck();
+
 
     }
 
-    //bool WallCheck()
-    //{
-    //    startPos = new Vector3(transform.position.x, transform.position.y + upperPos, transform.position.z);
-    //    endPos = new Vector3(transform.position.x, transform.position.y + lowerPos, transform.position.z);
 
-    //    //Physics.CapsuleCast(startPos, endPos, wallCheckRadius, transform.up, out wallhit, 1, wallLayers);
-    //   // return Physics.SphereCast(transform.position, wallCheckRadius, transform.up, out wallhit, 1, wallLayers);
-    //}
 
     private bool GroundCheck()
     {
@@ -100,7 +92,7 @@ public class PlayerStateChecker : MonoBehaviour
     {
         if (nearWall)
         {
-            Debug.Log("Enter in touch with another object");
+            //   Debug.Log("Enter in touch with another object");
 
             contactPoints[wallsTouched] = contactPoints[0];
             wallsTouched++;
@@ -130,7 +122,7 @@ public class PlayerStateChecker : MonoBehaviour
 
             nearWall = false;
             contactPoints = new ContactPoint[5];
-            Debug.Log("Exit wall");
+            // Debug.Log("Exit wall");
         }
 
 
@@ -138,7 +130,6 @@ public class PlayerStateChecker : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Debug.Log("Current player state is:" + currentState);
 
         //GroundCheck
         Gizmos.DrawSphere(checkSpherePos, sphereRadius);
