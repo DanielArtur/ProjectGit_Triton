@@ -20,10 +20,10 @@ public class PlayerStateChecker : MonoBehaviour
 
     }
 
-    ContactPoint contactPoint;
-    public ContactPoint ContactPoint
+    ContactPoint[] contactPoints = new ContactPoint[6];
+    public ContactPoint[] getContactPoints
     {
-        get { return contactPoint; }
+        get { return contactPoints; }
 
     }
 
@@ -38,6 +38,7 @@ public class PlayerStateChecker : MonoBehaviour
     [SerializeField] float wallCheckRadius;
     [SerializeField] float upperPos;
     [SerializeField] float lowerPos;
+    [SerializeField] float wallPointRadius;
 
 
     ////////////////////////////////////////////////////////////////Technical Variables////////////////////////////////////////////////////////////////////
@@ -49,8 +50,14 @@ public class PlayerStateChecker : MonoBehaviour
     Vector3 startPos;
     Vector3 endPos;
     public bool nearWall = false;
+    int wallsTouched = 1;
     // Layers
 
+
+    private void Start()
+    {
+        Debug.Log(contactPoints[0]);
+    }
 
     private void FixedUpdate()
     {
@@ -89,7 +96,19 @@ public class PlayerStateChecker : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (nearWall)
+        {
+            Debug.Log("Enter in touch with another object");
 
+            contactPoints[wallsTouched] = contactPoints[0];
+            wallsTouched++;
+
+        }
+
+
+    }
 
     private void OnCollisionStay(Collision collision)
     {
@@ -98,8 +117,7 @@ public class PlayerStateChecker : MonoBehaviour
 
             nearWall = true;
 
-
-            contactPoint = collision.contacts[0];
+            contactPoints[0] = collision.contacts[0];
 
         }
     }
@@ -111,6 +129,7 @@ public class PlayerStateChecker : MonoBehaviour
         {
 
             nearWall = false;
+            contactPoints = new ContactPoint[5];
             Debug.Log("Exit wall");
         }
 
@@ -128,10 +147,11 @@ public class PlayerStateChecker : MonoBehaviour
         Gizmos.DrawWireSphere(startPos, wallCheckRadius);
         Gizmos.DrawWireSphere(endPos, wallCheckRadius);
 
-
-
-
-
+        //Contact point check
+        for (int i = 0; i < contactPoints.Length; i++)
+        {
+            Gizmos.DrawSphere(contactPoints[i].point, wallPointRadius);
+        }
     }
 
 }

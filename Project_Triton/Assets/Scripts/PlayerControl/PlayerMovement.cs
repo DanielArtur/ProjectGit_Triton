@@ -95,7 +95,19 @@ public class PlayerMovement : MonoBehaviour
         if (stateChecker.nearWall && moveDirection.magnitude > 0)
         {
 
-            point = stateChecker.ContactPoint.normal;
+            //if()
+            //float maxAngle;
+            //ContactPoint bestPoint;
+
+            //foreach (ContactPoint p in stateChecker.getContactPoints)
+            //{
+
+
+
+            //}
+
+
+            point = stateChecker.getContactPoints[0].normal;
 
             float wallAngle = Vector3.Angle(moveDirection, point);
 
