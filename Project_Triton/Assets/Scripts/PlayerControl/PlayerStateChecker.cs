@@ -54,10 +54,7 @@ public class PlayerStateChecker : MonoBehaviour
     // Layers
 
 
-    private void Start()
-    {
-        Debug.Log(contactPoints[0]);
-    }
+
 
     private void FixedUpdate()
     {
