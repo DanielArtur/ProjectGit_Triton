@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e1469eeeb0bf34081bb0f71fe17ce9, type: 3}
+  m_Name: Pump Shotgun
+  m_EditorClassIdentifier: 
+  maxAmmo: 5
+  fireRate: 2
+  reloadSpeed: 3
+  itemPrefab: {fileID: 2614491604855682732, guid: b684d87582516af4e82ad127bf568381,
+    type: 3}
