@@ -1,23 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ShotgunItemPreset", menuName = "ScriptableObjects/ShotgunItemPresets/Shotgun")]
-public class ShotgunItemPreset : ScriptableObject
+public abstract class ItemPresetSO : ScriptableObject
 {
     private string _uid;
     public string uid => _uid;
 
-    [Header("Settings")]
     public string itemName;
-    public float baseMaxAmmo;
-    public float baseFireRate;
-    public float baseReloadSpeed;
-    public float baseDamage;
-    public float baseRange;
-    public Sprite baseSprite;
+    public GameObject itemPrefab;
+    public Sprite itemIcon;
 
-    [SerializeField] GameObject itemPrefab;
-
-
+    public abstract Item CreateItem();
 
 #if UNITY_EDITOR
     private void OnValidate()

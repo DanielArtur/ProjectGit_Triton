@@ -4,12 +4,12 @@ using UnityEngine;
 public class ItemDatabase : MonoBehaviour
 {
 
-    private Dictionary<string, ShotgunItemPreset> _itemPreset = new();
+    private Dictionary<string, ItemPresetSO> _itemPreset = new();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        var presets = Resources.LoadAll<ShotgunItemPreset>("");
+        var presets = Resources.LoadAll<ItemPresetSO>("");
 
         foreach (var preset in presets)
         {
@@ -24,18 +24,29 @@ public class ItemDatabase : MonoBehaviour
     }
 
 
-    public bool TryGetItemPreset(string uid, out ShotgunItemPreset preset)
+    public bool TryGetItemPreset(string uid, out ItemPresetSO preset)
     {
 
         if (string.IsNullOrEmpty(uid))
         {
+            Debug.Log($"No preset with UID: ({uid}) is found. The given preset variable will be set to null");
+
             preset = null;
             return false;
+
         }
 
         return _itemPreset.TryGetValue(uid, out preset);
 
 
+
+    }
+
+
+    public Item CreateItem(ItemPresetSO preset)
+    {
+
+        return preset.CreateItem();
 
     }
 }

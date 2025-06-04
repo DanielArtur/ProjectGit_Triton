@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4e1469eeeb0bf34081bb0f71fe17ce9, type: 3}
+  m_Script: {fileID: 11500000, guid: 120522931320bf54490eccc489ac0d28, type: 3}
   m_Name: Pump Shotgun
   m_EditorClassIdentifier: 
-  itemName: M1980
+  itemName: Pump Shotgun
+  itemPrefab: {fileID: 0}
+  itemIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   baseMaxAmmo: 1
   baseFireRate: 2
   baseReloadSpeed: 3
   baseDamage: 4
   baseRange: 5
-  baseSprite: {fileID: 0}
-  itemPrefab: {fileID: 2614491604855682732, guid: b684d87582516af4e82ad127bf568381,
-    type: 3}
+  baseSpread: 6

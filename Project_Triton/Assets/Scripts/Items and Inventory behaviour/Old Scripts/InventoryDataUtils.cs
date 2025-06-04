@@ -4,7 +4,7 @@ public static class InventoryDataUtils
 
 
 
-    //public static void ItemPresetWriter(Bitpacker packer, ItemPreset preset)
+    //public static void ItemPresetWriter(Bitpacker packer, ItemPresetSO preset)
     //{
     //    if (preset == null)
     //    {
@@ -20,7 +20,7 @@ public static class InventoryDataUtils
     //}
 
 
-    //public static void ItemPresetReader(BitPacker packer, ref ItemPreset preset)
+    //public static void ItemPresetReader(BitPacker packer, ref ItemPresetSO preset)
     //{
 
     //    bool hasPreset = false;
@@ -38,7 +38,7 @@ public static class InventoryDataUtils
     //    if (!Instancehandler.TryGetInstance(out ItemDatabase database))
     //    {
 
-    //        Debug.LogError($"Failed to get items database instance for reading ItemPreset!");
+    //        Debug.LogError($"Failed to get items database instance for reading ItemPresetSO!");
 
     //        return;
     //    }

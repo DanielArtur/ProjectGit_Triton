@@ -4,20 +4,22 @@ public class TestInteraction : MonoBehaviour, IInteractable
 {
 
     //Item shotgunItem;
-    [SerializeField] ItemDatabase _ItemDatabase;
-    [SerializeField] ShotgunItemPreset _Preset;
 
-    ShotgunItemPreset newPreset;
+    [SerializeField] ItemDatabase ItemDatabase;
+    [SerializeField] ItemPresetSO gfg;
     public void doInteraction()
     {
 
-        // shotgunItem = new Shotgun_Weapon();
-        // shotgunItem.model
-
         Debug.Log("You have interacted with object:" + gameObject.name);
 
-        _ItemDatabase.TryGetItemPreset(_Preset.uid, out newPreset);
-        Debug.Log($"new ShotgunItemPreset fetched: ({newPreset})");
+        ItemDatabase.TryGetItemPreset(gfg.uid, out ItemPresetSO newPresetToCreate);
+        Item newItem = ItemDatabase.CreateItem(newPresetToCreate);
+
+        Debug.Log($"New item created: ({newItem})");
+
+        ShotgunWeapon weapon = (ShotgunWeapon)newItem;
+        Debug.Log($"If it is a shotgun then it's damage is: ({weapon.damage})");
+
     }
 
     void Start()

@@ -5,7 +5,7 @@ public class PlayerInventory : NetworkBehaviour
 
     //[SerializeField] private SyncArray<InventoryItem> _inventoryItems = new();
 
-    //public bool TryAddItem(ItemPreset preset, int quantity)
+    //public bool TryAddItem(ItemPresetSO preset, int quantity)
     //{
 
     //    if (TryStack(preset, quantity))
@@ -18,7 +18,7 @@ public class PlayerInventory : NetworkBehaviour
 
     //}
 
-    //public bool TryStack(ItemPreset preset, int quantity)
+    //public bool TryStack(ItemPresetSO preset, int quantity)
     //{
 
     //    for (int i = 0; i < _inventoryItems.Length; i++)
@@ -38,7 +38,7 @@ public class PlayerInventory : NetworkBehaviour
 
     //}
 
-    //public bool TryAddNewItem(ItemPreset preset, int quantity)
+    //public bool TryAddNewItem(ItemPresetSO preset, int quantity)
     //{
 
     //    for (int i = 0; i < _inventoryItems.Length; i++)
@@ -61,7 +61,7 @@ public class PlayerInventory : NetworkBehaviour
 public struct InventoryItem
 {
 
-    public ItemPreset preset;
+    public ItemPresetSO preset;
 
     public int quantity;
 
