@@ -9,6 +9,8 @@ public abstract class ItemPresetSO : ScriptableObject
     public GameObject itemPrefab;
     public Sprite itemIcon;
 
+    public bool isStackable = false;
+
     public abstract Item CreateItem();
 
 #if UNITY_EDITOR

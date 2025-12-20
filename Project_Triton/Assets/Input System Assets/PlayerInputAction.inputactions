@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "PlayerInputAction",
     "maps": [
         {
@@ -9,7 +10,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "5ba972f0-b6fb-4564-abb6-90d74ac3962c",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -27,7 +28,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "522ed895-a812-4f8d-9dde-267d588c0b8a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -36,7 +37,7 @@
                     "name": "Crouch",
                     "type": "Button",
                     "id": "5038f79a-3034-40bc-bcd9-82e72153387f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -148,6 +149,54 @@
                     "processors": "",
                     "groups": "Mouse & Keyboard",
                     "action": "MouseMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerUI",
+            "id": "9479e691-b8be-4d0e-a69d-e35cd9d0f19c",
+            "actions": [
+                {
+                    "name": "Toggle_PlayerMenu",
+                    "type": "Button",
+                    "id": "5a16a037-e8d7-4bb2-ad83-3e2c225ecada",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Toggle_PlayerInventory",
+                    "type": "Button",
+                    "id": "b7cdff5b-0c38-4543-80db-a3b80df5ef9e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "712b5dad-7c73-45e1-9d31-a58de88cad5d",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mouse & Keyboard",
+                    "action": "Toggle_PlayerMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44905d8e-862c-47a8-afed-9099f93c2e58",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mouse & Keyboard",
+                    "action": "Toggle_PlayerInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

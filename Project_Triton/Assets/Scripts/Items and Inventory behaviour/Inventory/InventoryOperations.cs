@@ -2,7 +2,7 @@ using QFSW.QC;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Inventory
+public class InventoryOperations : MonoBehaviour
 {
     public class PlayerInventory : MonoBehaviour
     {
@@ -77,4 +77,3 @@ namespace Inventory
         }
     }
 }
-
