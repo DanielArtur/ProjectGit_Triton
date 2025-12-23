@@ -1,28 +1,20 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
-    PlayerInput PlayerInput;
     [SerializeField] GameObject PlayerMenuObject;
     [SerializeField] GameObject PlayerInventoryObject;
-
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayerInput = GetComponent<PlayerInput>();
         PlayerMenuObject.SetActive(false);
-        PlayerInventoryObject.SetActive(false);
+        PlayerInventoryObject.SetActive(true);
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     void OnToggle_PlayerMenu()
     {
@@ -31,7 +23,6 @@ public class UIManager : MonoBehaviour
 
         else PlayerMenuObject.SetActive(true);
 
-        Debug.Log("Open Player Menu");
 
 
     }
@@ -52,7 +43,6 @@ public class UIManager : MonoBehaviour
 
 
         }
-        Debug.Log("Open Player Menu");
 
 
     }
