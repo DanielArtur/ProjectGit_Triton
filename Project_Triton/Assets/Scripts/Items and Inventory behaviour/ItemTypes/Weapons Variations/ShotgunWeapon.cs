@@ -18,11 +18,11 @@ public class ShotgunWeapon : Weapon
     }
 
 
-    public override void UseItem()
-    {
-        Debug.Log($"Using weapon: {name}");
-        // Logic for using the weapon
-    }
+    //public override void UseItem()
+    //{
+    //    Debug.Log($"Using weapon: {itemName}");
+    //    // Logic for using the weapon
+    //}
 
 
     public override void Shoot()

@@ -4,77 +4,65 @@ using UnityEngine;
 
 namespace Inventory
 {
+
+
+
+    public struct InventoryItem
+    {
+        public Vector2 itemPos { get; set; }
+        public Item itemObject { get; set; }
+
+    }
+
+
     public class PlayerInventory : MonoBehaviour
     {
+        List<InventoryItem> _inventoryItems;
+        [SerializeField] GameObject TestItem;
 
-        List<Item> _inventoryItems;
+
+        private void Start()
+        {
+            _inventoryItems = new List<InventoryItem>();
+
+            //Test
+            //_inventoryItems.Add(TestItem.GetComponent<Item>());
+        }
+
+
 
         [Command]
-        public List<Item> GetInventory()
+        public List<InventoryItem> GetInventory()
         {
             Debug.Log(_inventoryItems);
             return _inventoryItems;
         }
 
-        //public bool CreateNewInventory()
-        //{
-
-        //    _inventoryItems = new List<Item>();
-
-
-
-
-        //}
-
-        public bool TryAddItem(Item newItem, int quantity, int[] cellsOccupied)
-        {
-
-            if (newItem.isStackable || TryStack(newItem, quantity))
-                return true;
-
-
-            return TryAddNewItem(newItem, quantity);
-
-        }
-
-        public bool TryStack(Item newItem, int quantity)
-        {
-
-            for (int i = 0; i < _inventoryItems.Count; i++)
-            {
-
-                var invItem = _inventoryItems[i];
-
-                if (invItem != newItem) continue;
-
-
-                invItem.quantity += quantity;
-                _inventoryItems[i] = invItem;
-                return true;
-
-            }
-            return false;
-
-        }
-
         public bool TryAddNewItem(Item newItem, int quantity)
         {
 
-            for (int i = 0; i < _inventoryItems.Count; i++)
-            {
-                var invItem = _inventoryItems[i];
+            InventoryItem i = new InventoryItem();
+            i.itemObject = newItem;
+            i.itemObject.quantity = quantity;
+            i.itemPos = new Vector2(0, 0);
 
-                if (invItem != null)
-                    continue;
+            _inventoryItems.Add(i);
+            Debug.Log(_inventoryItems[0].itemObject.itemName);
 
-                invItem = newItem;
-                invItem.quantity = quantity;
-                _inventoryItems[i] = invItem;
-                return true;
-            }
+            ShotgunWeapon shotgun = (ShotgunWeapon)_inventoryItems[0].itemObject;
+            Debug.Log("shotgun reload speed is: " + shotgun.reloadSpeed);
 
-            return false;
+            shotgun.reloadSpeed = 6;
+            //_inventoryItems[0].itemObject = (Item)shotgun;
+
+
+            Debug.Log("shotgun reload speed after change is: " + shotgun.reloadSpeed);
+
+
+
+            return true;
         }
+
     }
 }
 

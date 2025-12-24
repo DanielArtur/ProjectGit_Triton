@@ -6,7 +6,7 @@ public class InventoryUIManager : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////Refrences////////////////////////////////////////////////////////////////////
 
-    PlayerInventory inventory;
+    [SerializeField] PlayerInventory playerInventory;
     PlayerInput PlayerInput;
 
     [Header("References")]
@@ -54,6 +54,14 @@ public class InventoryUIManager : MonoBehaviour
 
     //    }
     //}
+
+    public void UpdateInventory()
+    {
+
+
+
+
+    }
 
 
     public void CreateCells(GameObject cellPrefab, Transform destinationObject, int cellAmount, out Vector2 firstCell)

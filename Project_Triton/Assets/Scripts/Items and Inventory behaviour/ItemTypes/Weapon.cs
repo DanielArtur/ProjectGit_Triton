@@ -17,12 +17,12 @@ public abstract class Weapon : Item
     }
 
 
-    public override void UseItem()
-    {
+    //public override void UseItem()
+    //{
 
-        Debug.Log("Used the item");
+    //    Debug.Log("Used the item");
 
-    }
+    //}
 
     public abstract void Shoot();
 

@@ -1,18 +1,13 @@
+using Inventory;
 using UnityEngine;
 
 
-
-interface IInteractable
-{
-    public void doInteraction();
-
-
-}
-
-public class Interaction : MonoBehaviour
+public class Interactor : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Transform camLook;
+    public PlayerInventory inventory;
+
 
     [Header("Settings")]
     [SerializeField] float distance;
@@ -21,6 +16,11 @@ public class Interaction : MonoBehaviour
     RaycastHit hit;
     public bool canInteract = false;
 
+    private void Start()
+    {
+        inventory = GetComponent<PlayerInventory>();
+
+    }
 
     void Update()
     {
@@ -34,20 +34,29 @@ public class Interaction : MonoBehaviour
             }
 
         }
-        canInteract = false;
 
+
+        canInteract = false;
     }
 
 
     void OnInteract()
     {
+
         if (!canInteract)
             return;
 
 
         if (hit.transform.TryGetComponent(out IInteractable interactObj))
         {
-            interactObj.doInteraction();
+            if (interactObj == null)
+            {
+                Debug.LogWarning("Interactable object " + interactObj + " is null");
+                return;
+            }
+
+            Debug.Log("Interact Check");
+            interactObj.Interact(this);
 
         }
 

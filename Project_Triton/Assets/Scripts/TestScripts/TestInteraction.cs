@@ -1,12 +1,15 @@
+using Inventory;
 using UnityEngine;
 
-public class TestInteraction : MonoBehaviour, IInteractable
+public class TestInteraction : MonoBehaviour
 {
 
     //Item shotgunItem;
 
     [SerializeField] ItemDatabase ItemDatabase;
     [SerializeField] ItemPresetSO gfg;
+    [SerializeField] PlayerInventory _PlayerInventory;
+    [SerializeField] Item testitem11;
     public void doInteraction()
     {
 
@@ -24,7 +27,8 @@ public class TestInteraction : MonoBehaviour, IInteractable
 
     void Start()
     {
-
+        // _PlayerInventory.TryAddNewItem(testitem11, 1);
+        //   Debug.Log("It works!");
     }
 
     // Update is called once per frame

@@ -4,9 +4,9 @@ using UnityEngine;
 
 
 [System.Serializable]
-public abstract class Item
+public class Item : MonoBehaviour
 {
-    public string name;
+    public string itemName;
     public string itemID;
     public Sprite itemIcon;
     public int quantity = 1;
@@ -14,14 +14,14 @@ public abstract class Item
 
     public Item(string name, string itemUID, Sprite itemIcon, bool isStackable)
     {
-        this.name = name;
+        this.itemName = name;
         this.itemID = itemUID;
         this.itemIcon = itemIcon;
         this.isStackable = isStackable;
     }
 
 
-    public abstract void UseItem();
+    // public abstract void UseItem();
 
 
 
