@@ -20,7 +20,11 @@ public class Interactor : MonoBehaviour
     {
         inventory = GetComponent<PlayerInventory>();
 
+
+
     }
+
+
 
     void Update()
     {
@@ -55,7 +59,6 @@ public class Interactor : MonoBehaviour
                 return;
             }
 
-            Debug.Log("Interact Check");
             interactObj.Interact(this);
 
         }
