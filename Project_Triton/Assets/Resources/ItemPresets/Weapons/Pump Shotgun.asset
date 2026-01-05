@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Pump Shotgun
   m_EditorClassIdentifier: 
   itemName: Pump Shotgun
-  itemPrefab: {fileID: 0}
-  itemIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  itemPrefab: {fileID: 7813109943378934929, guid: e6caf85af82756b44b5529e90e9ad491,
+    type: 3}
+  itemIcon: {fileID: 21300000, guid: 46223c9e0b31bcb42b17a8bd037b6ef2, type: 3}
+  isStackable: 0
   baseMaxAmmo: 1
   baseFireRate: 2
   baseReloadSpeed: 3

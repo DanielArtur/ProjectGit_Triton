@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -9,11 +10,19 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Let the system initialize first and only then disable:
+        StartCoroutine(DisableUIMenu());
+
+    }
+
+    IEnumerator DisableUIMenu()
+    {
+        yield return null;
+
         PlayerMenuObject.SetActive(false);
         PlayerInventoryObject.SetActive(true);
 
     }
-
 
 
     void OnToggle_PlayerMenu()

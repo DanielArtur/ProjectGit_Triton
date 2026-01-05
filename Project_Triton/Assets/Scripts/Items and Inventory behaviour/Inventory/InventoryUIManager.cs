@@ -1,17 +1,17 @@
-using Inventory;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class InventoryUIManager : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////Refrences////////////////////////////////////////////////////////////////////
 
     [SerializeField] PlayerInventory playerInventory;
-    PlayerInput PlayerInput;
 
     [Header("References")]
     [SerializeField] GameObject InventoryCellPrefab;
+    [SerializeField] GameObject ItemIconPrefab;
     [SerializeField] GameObject CellHolder;
+    [SerializeField] GameObject ItemHolder;
 
 
     ////////////////////////////////////////////////////////////////Settings////////////////////////////////////////////////////////////////////
@@ -22,22 +22,24 @@ public class InventoryUIManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////Technical variables////////////////////////////////////////////////////////////////////
     Dictionary<int, InventoryUIItem> GridPositions;
     int gridCellAmount;
-    Vector2 gridStartPoint;
-    Vector2 cellSize;
+    public Transform gridStartPoint;
+    Vector2 cellImageSize;
+
+
+
 
     void Start()
     {
-        PlayerInput = GetComponent<PlayerInput>();
 
         gridCellAmount = (int)(inventorySize.x * inventorySize.y);
-
-
-
         CreateCells(InventoryCellPrefab, CellHolder.transform, gridCellAmount, out gridStartPoint);
-        // AssignCellPositions(inventory.GetInventory());
+
     }
 
-    //private void AssignCellPositions(List<Item> inventory)
+
+
+
+    //private void AssignCellPositions(List<inventoryItem> inventory)
     //{
 
     //    GridPositions = new List<Vector2>();
@@ -64,10 +66,12 @@ public class InventoryUIManager : MonoBehaviour
     }
 
 
-    public void CreateCells(GameObject cellPrefab, Transform destinationObject, int cellAmount, out Vector2 firstCell)
+    public void CreateCells(GameObject cellPrefab, Transform destinationObject, int cellAmount, out Transform firstCellPos)
     {
 
-        firstCell = Instantiate(cellPrefab, destinationObject).transform.position;
+        GameObject firstCell = Instantiate(cellPrefab, destinationObject);
+        firstCell.gameObject.name = "firstcell";
+        firstCellPos = firstCell.transform;
 
         for (int i = 1; i < cellAmount; i++)
         {
@@ -76,6 +80,29 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
+    public void AddItemIcon(InventoryItemSlot item)
+    {
+
+        //Vector3 globalGridPosition = CellHolder.transform.TransformPoint(gridStartPoint.position);
+        //Debug.Log(gridStartPoint.GetComponent<RectTransform>().anchoredPosition);
+        //Vector2 pos = new Vector2(inventoryItem.ItemPos.x + globalGridPosition.x, inventoryItem.ItemPos.y + globalGridPosition.y);
+        //pos = ItemHolder.transform.InverseTransformPoint(pos);
+
+
+        //GameObject newItemIcon = Instantiate(ItemIconPrefab, pos, Quaternion.identity, ItemHolder.transform);
+        //newItemIcon.GetComponent<Image>().sprite = inventoryItem.inventoryItem.itemIcon;
+
+
+        Vector2 anchoredGridPosition = gridStartPoint.GetComponent<RectTransform>().anchoredPosition;
+
+        Vector2 pos = new Vector2(item.ItemPos.x + anchoredGridPosition.x, item.ItemPos.y + anchoredGridPosition.y);
+        GameObject newItemIcon = Instantiate(ItemIconPrefab, Vector2.zero, Quaternion.identity, ItemHolder.transform);
+
+        newItemIcon.GetComponent<Image>().sprite = item.inventoryItem.itemIcon;
+        newItemIcon.GetComponent<RectTransform>().anchoredPosition = pos;
+
+
+    }
 
 
 }

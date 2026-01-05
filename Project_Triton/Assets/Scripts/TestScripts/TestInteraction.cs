@@ -1,12 +1,11 @@
-using Inventory;
+using ItemManagement;
 using UnityEngine;
-
 public class TestInteraction : MonoBehaviour
 {
 
-    //Item shotgunItem;
+    //inventoryItem shotgunItem;
 
-    [SerializeField] ItemDatabase ItemDatabase;
+    [SerializeField] ItemConstructor ItemDatabase;
     [SerializeField] ItemPresetSO gfg;
     [SerializeField] PlayerInventory _PlayerInventory;
     [SerializeField] Item testitem11;
@@ -18,7 +17,7 @@ public class TestInteraction : MonoBehaviour
         ItemDatabase.TryGetItemPreset(gfg.uid, out ItemPresetSO newPresetToCreate);
         Item newItem = ItemDatabase.CreateItem(newPresetToCreate);
 
-        Debug.Log($"New item created: ({newItem})");
+        Debug.Log($"New inventoryItem created: ({newItem})");
 
         ShotgunWeapon weapon = (ShotgunWeapon)newItem;
         Debug.Log($"If it is a shotgun then it's damage is: ({weapon.damage})");

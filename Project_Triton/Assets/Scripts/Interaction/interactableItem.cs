@@ -2,27 +2,33 @@ using UnityEngine;
 
 public class interactableItem : MonoBehaviour, IInteractable
 {
-    [SerializeField] ItemDatabase itemDatabase;
+
+    [HideInInspector] public Item item;
+    public ItemPresetSO preset;
+
+    // Item Data
 
 
-    public Item item;
 
-    public interactableItem(Item i)
+    void Start()
     {
-        item = i;
+
+        if (preset != null)
+        {
+
+            Debug.Log("Create item");
+            item = preset.CreateItem();
+            AssignName();
+
+        }
 
 
     }
 
-
-    private void Start()
+    public void AssignName()
     {
-        ItemPresetSO newPreset;
-        itemDatabase.TryGetItemPreset("a5b809d3b6aa11045b310f4ee3b9d990", out newPreset);
-        item = itemDatabase.CreateItem(newPreset);
 
-
-        //item = new Item("moeo", "1324", null, true);
+        gameObject.name = item.itemName;
     }
 
 
@@ -31,7 +37,7 @@ public class interactableItem : MonoBehaviour, IInteractable
 
         if (!interactor.inventory.TryAddNewItem(item, 1))
         {
-            Debug.LogWarning("Could not add item: " + item.itemName);
+            Debug.LogWarning("Could not add inventoryItem: " + item.itemName);
             return;
         }
 

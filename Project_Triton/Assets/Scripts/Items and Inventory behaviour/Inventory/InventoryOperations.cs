@@ -17,7 +17,7 @@ public class InventoryOperations : MonoBehaviour
     //public bool CreateNewInventory()
     //{
 
-    //    _inventoryItems = new List<Item>();
+    //    _inventoryItems = new List<inventoryItem>();
 
 
 

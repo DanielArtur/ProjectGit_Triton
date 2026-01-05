@@ -34,6 +34,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "DropItem",
+                    "type": "Button",
+                    "id": "4c12a07a-b798-4941-ae90-2fdf31d60197",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Crouch",
                     "type": "Button",
                     "id": "5038f79a-3034-40bc-bcd9-82e72153387f",
@@ -127,6 +136,17 @@
                     "processors": "",
                     "groups": "Mouse & Keyboard",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ece1535d-4729-4e6b-9ad5-3770b9ec3c43",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "DropItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
