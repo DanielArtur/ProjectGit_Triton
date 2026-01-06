@@ -14,9 +14,9 @@ public class Item : MonoBehaviour
     public int quantity = 1;
     public bool isStackable = false;
     public bool canEquip = false;
-    public Vector2 size;
+    public Vector2 itemSize;
 
-    public Item(string name, string itemUID, Sprite itemIcon, bool isStackable, bool canEquip, GameObject itemPrefab)
+    public Item(string name, string itemUID, Sprite itemIcon, bool isStackable, bool canEquip, GameObject itemPrefab, Vector2 size)
     {
         this.itemName = name;
         this.itemUID = itemUID;
@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
         this.isStackable = isStackable;
         this.canEquip = canEquip;
         this.itemPrefab = itemPrefab;
+        this.itemSize = size;
     }
 
 

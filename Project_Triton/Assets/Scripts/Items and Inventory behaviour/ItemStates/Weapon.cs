@@ -8,7 +8,7 @@ public abstract class Weapon : Item
     public float damage;
     public float range;
 
-    public Weapon(float baseFireRate, float baseDamage, float baseRange, string name, string itemUID, Sprite itemIcon, GameObject weaponPrefab) : base(name, itemUID, itemIcon, false, true, weaponPrefab)
+    public Weapon(float baseFireRate, float baseDamage, float baseRange, string name, string itemUID, Sprite itemIcon, GameObject weaponPrefab, Vector2 size) : base(name, itemUID, itemIcon, false, true, weaponPrefab, size)
     {
         fireRate = baseFireRate;
         damage = baseDamage;

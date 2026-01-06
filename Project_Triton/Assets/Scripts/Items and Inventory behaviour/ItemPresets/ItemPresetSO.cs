@@ -8,6 +8,7 @@ public abstract class ItemPresetSO : ScriptableObject
     public string itemName;
     public GameObject itemPrefab;
     public Sprite itemIcon;
+    public Vector2 itemSize = new Vector2(1, 1);
 
     public bool isStackable = false;
 

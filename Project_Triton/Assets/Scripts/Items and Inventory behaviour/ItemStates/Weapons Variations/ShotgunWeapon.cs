@@ -8,7 +8,7 @@ public class ShotgunWeapon : Weapon
     public float reloadSpeed;
     public float maxAmmo;
 
-    public ShotgunWeapon(ShotgunSO preset) : base(preset.baseFireRate, preset.baseDamage, preset.baseRange, preset.itemName, preset.uid, preset.itemIcon, preset.itemPrefab)
+    public ShotgunWeapon(ShotgunSO preset) : base(preset.baseFireRate, preset.baseDamage, preset.baseRange, preset.itemName, preset.uid, preset.itemIcon, preset.itemPrefab, preset.itemSize)
 
     {
 

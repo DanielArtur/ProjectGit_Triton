@@ -16,6 +16,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 7813109943378934929, guid: e6caf85af82756b44b5529e90e9ad491,
     type: 3}
   itemIcon: {fileID: 21300000, guid: 46223c9e0b31bcb42b17a8bd037b6ef2, type: 3}
+  itemSize: {x: 1, y: 1}
   isStackable: 0
   baseMaxAmmo: 1
   baseFireRate: 2

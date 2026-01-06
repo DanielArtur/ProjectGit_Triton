@@ -6198,6 +6198,7 @@ MonoBehaviour:
   TestItem: {fileID: 0}
   _itemDatabase: {fileID: 207878148}
   testItem_Shotgun: {fileID: 637097419}
+  inventorySize: {x: 5, y: 6}
 --- !u!114 &1751675108
 MonoBehaviour:
   m_ObjectHideFlags: 0

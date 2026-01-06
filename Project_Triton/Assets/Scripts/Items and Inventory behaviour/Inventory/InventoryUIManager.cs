@@ -17,19 +17,21 @@ public class InventoryUIManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////Settings////////////////////////////////////////////////////////////////////
     [Header("Inventory Settings")]
     [Tooltip("Only whole numbers permitted")]
-    [SerializeField] Vector2 inventorySize = new Vector2(5, 6);
 
     ////////////////////////////////////////////////////////////////Technical variables////////////////////////////////////////////////////////////////////
     Dictionary<int, InventoryUIItem> GridPositions;
     int gridCellAmount;
     public Transform gridStartPoint;
     Vector2 cellImageSize;
+    Vector2 inventorySize;
 
 
 
 
     void Start()
     {
+
+        inventorySize = playerInventory.inventorySize;
 
         gridCellAmount = (int)(inventorySize.x * inventorySize.y);
         CreateCells(InventoryCellPrefab, CellHolder.transform, gridCellAmount, out gridStartPoint);

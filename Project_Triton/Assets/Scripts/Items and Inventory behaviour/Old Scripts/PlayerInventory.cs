@@ -28,8 +28,8 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] GameObject testItem_Shotgun;
 
+    public Vector2 inventorySize = new Vector2(5, 6);
 
-    Vector2 inventorySize;
     private void Start()
     {
         _inventoryItems = new List<InventoryItemSlot>();
@@ -118,24 +118,37 @@ public class PlayerInventory : MonoBehaviour
 
     bool IsFreeSpaceAvailable(Item newItem, out Vector2 freeCellIndex)
     {
-        float spaceToTry;
+
+        if (_inventoryItems.Count == 0)
+        {
+            freeCellIndex = new Vector2(0, 0);
+            return true;
+        }
+
+        float maxCellIndex;
 
         for (int currentRowIndex = 0; currentRowIndex < inventorySize.y; currentRowIndex++)
         {
-            for (int currentCellIndex = 0; currentCellIndex < inventorySize.x; currentCellIndex++)
+            for (int minCellIndex = 0; minCellIndex < inventorySize.x; minCellIndex++)
             {
                 // Choose the cells to test whether they are free:
-                spaceToTry = currentCellIndex + newItem.size.x;
+                maxCellIndex = minCellIndex + ((int)newItem.itemSize.x - 1);
 
                 foreach (var index in _inventoryItems)
                 {
 
-                    if (currentCellIndex == index.cellIndex.x)
+                    float itemPosTest = index.cellIndex.x + index.inventoryItem.itemSize.x;
+
+
+
+                    if (minCellIndex <= index.cellIndex.x & maxCellIndex >= itemPosTest ||
+                        minCellIndex >= index.cellIndex.x & minCellIndex <= itemPosTest ||
+                        maxCellIndex >= index.cellIndex.x & maxCellIndex <= itemPosTest)
                         continue;
 
-                    freeCellIndex = new Vector2(currentCellIndex, currentRowIndex);
+                    Debug.Log("True");
+                    freeCellIndex = new Vector2(minCellIndex, currentRowIndex);
                     return true;
-
 
                 }
 
@@ -144,6 +157,7 @@ public class PlayerInventory : MonoBehaviour
 
         }
 
+        Debug.Log("False");
         freeCellIndex = Vector2.zero;
         return false;
     }
