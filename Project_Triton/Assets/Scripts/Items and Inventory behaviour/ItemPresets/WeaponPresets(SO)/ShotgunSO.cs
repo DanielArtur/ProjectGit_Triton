@@ -14,7 +14,7 @@ public class ShotgunSO : ItemPresetSO
 
     public override Item CreateItem()
     {
-        Debug.Log($"Create a shotgun with preset: ({this})");
+        //Debug.Log($"Create a shotgun with preset: ({this})");
         return new ShotgunWeapon(this);
     }
 

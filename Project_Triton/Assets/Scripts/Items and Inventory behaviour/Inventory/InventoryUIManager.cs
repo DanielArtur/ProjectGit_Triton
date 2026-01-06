@@ -87,21 +87,26 @@ public class InventoryUIManager : MonoBehaviour
 
         //Vector3 globalGridPosition = CellHolder.transform.TransformPoint(gridStartPoint.position);
         //Debug.Log(gridStartPoint.GetComponent<RectTransform>().anchoredPosition);
-        //Vector2 pos = new Vector2(inventoryItem.ItemPos.x + globalGridPosition.x, inventoryItem.ItemPos.y + globalGridPosition.y);
-        //pos = ItemHolder.transform.InverseTransformPoint(pos);
+        //Vector2 itemUIPos = new Vector2(inventoryItem.itemCellIndex.x + globalGridPosition.x, inventoryItem.itemCellIndex.y + globalGridPosition.y);
+        //itemUIPos = ItemHolder.transform.InverseTransformPoint(itemUIPos);
 
 
-        //GameObject newItemIcon = Instantiate(ItemIconPrefab, pos, Quaternion.identity, ItemHolder.transform);
+        //GameObject newItemIcon = Instantiate(ItemIconPrefab, itemUIPos, Quaternion.identity, ItemHolder.transform);
         //newItemIcon.GetComponent<Image>().sprite = inventoryItem.inventoryItem.itemIcon;
 
 
         Vector2 anchoredGridPosition = gridStartPoint.GetComponent<RectTransform>().anchoredPosition;
 
-        Vector2 pos = new Vector2(item.ItemPos.x + anchoredGridPosition.x, item.ItemPos.y + anchoredGridPosition.y);
+
+        // Adjust the posiiton relatively to cell size which is 100
+        float UIPosX = item.itemCellIndex.x * 100;
+        float UIPosY = item.itemCellIndex.y * 100;
+
+        Vector2 itemUIPos = new Vector2(UIPosX + anchoredGridPosition.x, UIPosY + anchoredGridPosition.y);
         GameObject newItemIcon = Instantiate(ItemIconPrefab, Vector2.zero, Quaternion.identity, ItemHolder.transform);
 
         newItemIcon.GetComponent<Image>().sprite = item.inventoryItem.itemIcon;
-        newItemIcon.GetComponent<RectTransform>().anchoredPosition = pos;
+        newItemIcon.GetComponent<RectTransform>().anchoredPosition = itemUIPos;
 
 
     }

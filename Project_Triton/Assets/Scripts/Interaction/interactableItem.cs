@@ -16,7 +16,6 @@ public class interactableItem : MonoBehaviour, IInteractable
         if (preset != null)
         {
 
-            Debug.Log("Create item");
             item = preset.CreateItem();
             AssignName();
 
@@ -37,7 +36,7 @@ public class interactableItem : MonoBehaviour, IInteractable
 
         if (!interactor.inventory.TryAddNewItem(item, 1))
         {
-            Debug.LogWarning("Could not add inventoryItem: " + item.itemName);
+            Debug.LogWarning("Could not add item: " + item.itemName);
             return;
         }
 

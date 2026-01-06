@@ -7,10 +7,9 @@ using UnityEngine;
 
 public struct InventoryItemSlot
 {
-    public Vector2 ItemPos { get; set; }
+    public Vector2 itemCellIndex { get; set; }
 
     //How many cells does item take;
-    public Vector2 cellIndex { get; set; }
 
     public Item inventoryItem { get; set; }
 
@@ -66,37 +65,40 @@ public class PlayerInventory : MonoBehaviour
         return _inventoryItems;
     }
 
+
     public bool TryAddNewItem(Item newItem, int quantity)
     {
-        Vector2 newItemPosition;
 
-        if (!IsFreeSpaceAvailable(newItem, out newItemPosition))
+        Vector2 newItemCellIndex;
+        if (!IsFreeSpaceAvailable(newItem, out newItemCellIndex))
         {
-            Debug.Log("No free space");
             return false;
         }
 
 
+        Debug.Log(newItemCellIndex);
 
-
-        var itemToAdd = new InventoryItemSlot();
+        InventoryItemSlot itemToAdd = new InventoryItemSlot();
         itemToAdd.inventoryItem = newItem;
-        itemToAdd.ItemPos = newItemPosition;
+        itemToAdd.itemCellIndex = newItemCellIndex;
 
         _inventoryItems.Add(itemToAdd);
 
+
         if (inventoryUIManager == null)
             Debug.LogWarning("No inventoryUIManager found");
+
+
         // You could add events!
         inventoryUIManager.AddItemIcon(itemToAdd);
 
 
         if (_inventoryItems.Contains(itemToAdd))
-        {
-            Debug.Log("Now your inventory contains createdItem: " + _inventoryItems[0].inventoryItem.itemName);
             return true;
 
-        }
+
+
+
         return false;
     }
 
@@ -126,6 +128,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         float maxCellIndex;
+        bool foundFreeSpace;
 
         for (int currentRowIndex = 0; currentRowIndex < inventorySize.y; currentRowIndex++)
         {
@@ -134,24 +137,40 @@ public class PlayerInventory : MonoBehaviour
                 // Choose the cells to test whether they are free:
                 maxCellIndex = minCellIndex + ((int)newItem.itemSize.x - 1);
 
+                foundFreeSpace = true;
+
+                //Debug.Log("Testing column. MinCellIndex " + minCellIndex + " MaxCellIndex " + maxCellIndex);
+
                 foreach (var index in _inventoryItems)
                 {
 
-                    float itemPosTest = index.cellIndex.x + index.inventoryItem.itemSize.x;
+                    float testItemEndPoint = index.itemCellIndex.x + ((int)index.inventoryItem.itemSize.x - 1);
+                    Debug.Log("Running iteratrion. TestItemStartPoint and testItemEndPoint: " + index.itemCellIndex.x + " " + testItemEndPoint + " While minCellIndex is " + minCellIndex + " and MaxCellIndex is " + maxCellIndex);
 
 
+                    if (minCellIndex <= index.itemCellIndex.x & maxCellIndex >= testItemEndPoint ||
+                        minCellIndex >= index.itemCellIndex.x & minCellIndex <= testItemEndPoint ||
+                        maxCellIndex >= index.itemCellIndex.x & maxCellIndex <= testItemEndPoint)
+                    {
+                        Debug.Log("The cell num. " + minCellIndex + " is alredy in use");
+                        foundFreeSpace = false;
+                        break;
 
-                    if (minCellIndex <= index.cellIndex.x & maxCellIndex >= itemPosTest ||
-                        minCellIndex >= index.cellIndex.x & minCellIndex <= itemPosTest ||
-                        maxCellIndex >= index.cellIndex.x & maxCellIndex <= itemPosTest)
-                        continue;
-
-                    Debug.Log("True");
-                    freeCellIndex = new Vector2(minCellIndex, currentRowIndex);
-                    return true;
+                    }
 
                 }
 
+                //Debug.Log("We were testiing position for MinCelIndex and MaxCellIndex: " + minCellIndex + " " + maxCellIndex + ". " + );
+
+                if (!foundFreeSpace)
+                {
+                    Debug.Log("No free space, Iterate next");
+                    continue;
+
+                }
+                Debug.Log("Found free space");
+                freeCellIndex = new Vector2(minCellIndex, currentRowIndex);
+                return true;
 
             }
 
