@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 120522931320bf54490eccc489ac0d28, type: 3}
-  m_Name: Pump Shotgun
-  m_EditorClassIdentifier: 
-  itemName: Pump Shotgun
+  m_Name: AK47
+  m_EditorClassIdentifier: Assembly-CSharp::ShotgunSO
+  itemName: AK-47
   itemPrefab: {fileID: 7813109943378934929, guid: e6caf85af82756b44b5529e90e9ad491,
     type: 3}
-  itemIcon: {fileID: 21300000, guid: 7c1835c831cc33045b3e15f614ed66d7, type: 3}
-  itemSize: {x: 1, y: 1}
+  itemIcon: {fileID: 21300000, guid: b638923084c9fb145bded1af37ff7dc3, type: 3}
+  itemSize: {x: 5, y: 2}
   isStackable: 0
   baseMaxAmmo: 1
   baseFireRate: 2

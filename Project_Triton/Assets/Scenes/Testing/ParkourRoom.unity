@@ -2832,7 +2832,7 @@ PrefabInstance:
         type: 3}
       propertyPath: preset
       value: 
-      objectReference: {fileID: 11400000, guid: 70cb2d2454d9c514aac2ea464d85d1e3,
+      objectReference: {fileID: 11400000, guid: 6dd902a8b0582ee4d8e31e3e71ba84cd,
         type: 2}
     - target: {fileID: 7041500297908280292, guid: e6caf85af82756b44b5529e90e9ad491,
         type: 3}
