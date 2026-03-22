@@ -95,6 +95,9 @@ public class InventoryUIManager : MonoBehaviour
         //newItemIcon.GetComponent<Image>().sprite = inventoryItem.inventoryItem.itemIcon;
 
 
+
+
+
         Vector2 anchoredGridPosition = gridStartPoint.GetComponent<RectTransform>().anchoredPosition;
 
 
@@ -105,8 +108,21 @@ public class InventoryUIManager : MonoBehaviour
         Vector2 itemUIPos = new Vector2(UIPosX + anchoredGridPosition.x, UIPosY + anchoredGridPosition.y);
         GameObject newItemIcon = Instantiate(ItemIconPrefab, Vector2.zero, Quaternion.identity, ItemHolder.transform);
 
+        RectTransform itemRectTranform = newItemIcon.GetComponent<RectTransform>();
+
         newItemIcon.GetComponent<Image>().sprite = item.inventoryItem.itemIcon;
-        newItemIcon.GetComponent<RectTransform>().anchoredPosition = itemUIPos;
+
+        itemRectTranform.anchoredPosition = itemUIPos;
+
+        //Test
+        Vector2 newSize = new Vector2(item.inventoryItem.itemSize.x * 100, item.inventoryItem.itemSize.y * 100);
+        itemRectTranform.sizeDelta = newSize;
+
+        //150 for y because Unity counts from bottom left.
+        Vector2 newPivotPosition = new Vector2(50 / newSize.x, (newSize.y - 50) / newSize.y);
+        itemRectTranform.pivot = newPivotPosition;
+
+
 
 
     }
