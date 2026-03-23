@@ -103,7 +103,7 @@ public class InventoryUIManager : MonoBehaviour
 
         // Adjust the posiiton relatively to cell size which is 100
         float UIPosX = item.itemCellIndex.x * 100;
-        float UIPosY = item.itemCellIndex.y * 100;
+        float UIPosY = -item.itemCellIndex.y * 100;
 
         Vector2 itemUIPos = new Vector2(UIPosX + anchoredGridPosition.x, UIPosY + anchoredGridPosition.y);
         GameObject newItemIcon = Instantiate(ItemIconPrefab, Vector2.zero, Quaternion.identity, ItemHolder.transform);

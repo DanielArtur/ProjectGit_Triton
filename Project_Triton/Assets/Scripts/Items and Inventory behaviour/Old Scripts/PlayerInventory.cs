@@ -118,7 +118,7 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
-    bool IsFreeSpaceAvailable(Item newItem, out Vector2 freeCellIndex)
+    bool IsFreeSpaceAvailable(Item itemToAdd, out Vector2 freeCellIndex)
     {
 
         if (_inventoryItems.Count == 0)
@@ -127,32 +127,48 @@ public class PlayerInventory : MonoBehaviour
             return true;
         }
 
-        float maxCellIndex;
+        Vector2 newItemEndCell;
+        Vector2 newItemStartCell;
         bool foundFreeSpace;
 
-        for (int currentRowIndex = 0; currentRowIndex < inventorySize.y; currentRowIndex++)
+        for (int currentYCellIndex = 0; currentYCellIndex < inventorySize.y; currentYCellIndex++)
         {
-            for (int minCellIndex = 0; minCellIndex < inventorySize.x; minCellIndex++)
+            for (int currentXCellIndex = 0; currentXCellIndex < inventorySize.x; currentXCellIndex++)
             {
-                // Choose the cells to test whether they are free:
-                maxCellIndex = minCellIndex + ((int)newItem.itemSize.x - 1);
+                // Choose the area to test whether it is free:
+                Rect areaToTest = new Rect(currentXCellIndex + 1, currentYCellIndex + 1, itemToAdd.itemSize.x, itemToAdd.itemSize.y);
+
+
+                //newItemStartCell = new Vector2(currentXCellIndex, currentYCellIndex);
+                //newItemEndCell = new Vector2(currentXCellIndex + ((int)itemToAdd.itemSize.x - 1), currentYCellIndex + ((int)itemToAdd.itemSize.y - 1));
 
                 foundFreeSpace = true;
 
-                //Debug.Log("Testing column. MinCellIndex " + minCellIndex + " MaxCellIndex " + maxCellIndex);
+                //Debug.Log("Testing column. MinCellIndex " + currentXCellIndex + " MaxCellIndex " + newItemEndCell);
+
+
+                if ((currentXCellIndex + itemToAdd.itemSize.x) > inventorySize.x)
+                {
+                    Debug.Log("The item is too large for the current row");
+                    break;
+
+
+                }
+
 
                 foreach (var index in _inventoryItems)
                 {
+                    // Vector2 testItemStart = index.itemCellIndex;
+                    // Vector2 testItemEnd = new Vector2(index.itemCellIndex.x + ((int)index.inventoryItem.itemSize.x - 1), index.itemCellIndex.x + ((int)index.inventoryItem.itemSize.y - 1));
+                    //Debug.Log("Running iteratrion. TestItemStartPoint and testItemEnd: " + index.itemCellIndex.x + " " + testItemEnd + " While currentXCellIndex is " + currentXCellIndex + " and MaxCellIndex is " + newItemEndCell);
 
-                    float testItemEndPoint = index.itemCellIndex.x + ((int)index.inventoryItem.itemSize.x - 1);
-                    Debug.Log("Running iteratrion. TestItemStartPoint and testItemEndPoint: " + index.itemCellIndex.x + " " + testItemEndPoint + " While minCellIndex is " + minCellIndex + " and MaxCellIndex is " + maxCellIndex);
+                    Rect testItem = new Rect(index.itemCellIndex.x + 1, index.itemCellIndex.y + 1, index.inventoryItem.itemSize.x, index.inventoryItem.itemSize.x);
 
 
-                    if (minCellIndex <= index.itemCellIndex.x & maxCellIndex >= testItemEndPoint ||
-                        minCellIndex >= index.itemCellIndex.x & minCellIndex <= testItemEndPoint ||
-                        maxCellIndex >= index.itemCellIndex.x & maxCellIndex <= testItemEndPoint)
+
+                    if (areaToTest.Overlaps(testItem))
                     {
-                        Debug.Log("The cell num. " + minCellIndex + " is alredy in use");
+                        Debug.Log("The cell num. " + currentXCellIndex + " is alredy in use");
                         foundFreeSpace = false;
                         break;
 
@@ -160,7 +176,7 @@ public class PlayerInventory : MonoBehaviour
 
                 }
 
-                //Debug.Log("We were testiing position for MinCelIndex and MaxCellIndex: " + minCellIndex + " " + maxCellIndex + ". " + );
+                //Debug.Log("We were testiing position for MinCelIndex and MaxCellIndex: " + currentXCellIndex + " " + newItemEndCell + ". " + );
 
                 if (!foundFreeSpace)
                 {
@@ -169,7 +185,7 @@ public class PlayerInventory : MonoBehaviour
 
                 }
                 Debug.Log("Found free space");
-                freeCellIndex = new Vector2(minCellIndex, currentRowIndex);
+                freeCellIndex = new Vector2(currentXCellIndex, currentYCellIndex);
                 return true;
 
             }
