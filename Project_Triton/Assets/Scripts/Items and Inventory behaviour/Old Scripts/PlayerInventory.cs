@@ -8,7 +8,6 @@ using UnityEngine;
 public struct InventoryItemSlot
 {
     public Vector2 itemCellIndex { get; set; }
-
     //How many cells does item take;
 
     public Item inventoryItem { get; set; }
@@ -68,9 +67,9 @@ public class PlayerInventory : MonoBehaviour
 
     public bool TryAddNewItem(Item newItem, int quantity)
     {
-
+        bool isFlipped = false;
         Vector2 newItemCellIndex;
-        if (!IsFreeSpaceAvailable(newItem, out newItemCellIndex))
+        if (!IsFreeSpaceAvailable(newItem, out newItemCellIndex, out isFlipped))
         {
             return false;
         }
@@ -118,8 +117,10 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
-    bool IsFreeSpaceAvailable(Item itemToAdd, out Vector2 freeCellIndex)
+    bool IsFreeSpaceAvailable(Item itemToAdd, out Vector2 freeCellIndex, out bool isFlipped)
     {
+
+        isFlipped = false;
 
         if (_inventoryItems.Count == 0)
         {
@@ -131,12 +132,12 @@ public class PlayerInventory : MonoBehaviour
         Vector2 newItemStartCell;
         bool foundFreeSpace;
 
+
         for (int currentYCellIndex = 0; currentYCellIndex < inventorySize.y; currentYCellIndex++)
         {
             for (int currentXCellIndex = 0; currentXCellIndex < inventorySize.x; currentXCellIndex++)
             {
-                // Choose the area to test whether it is free:
-                Rect areaToTest = new Rect(currentXCellIndex + 1, currentYCellIndex + 1, itemToAdd.itemSize.x, itemToAdd.itemSize.y);
+                Rect areaToTest;
 
 
                 //newItemStartCell = new Vector2(currentXCellIndex, currentYCellIndex);
@@ -146,14 +147,26 @@ public class PlayerInventory : MonoBehaviour
 
                 //Debug.Log("Testing column. MinCellIndex " + currentXCellIndex + " MaxCellIndex " + newItemEndCell);
 
-
+                // Check whether item is too large for the current row in both original and flipped form
                 if ((currentXCellIndex + itemToAdd.itemSize.x) > inventorySize.x)
                 {
-                    Debug.Log("The item is too large for the current row");
-                    break;
+                    if ((currentXCellIndex + itemToAdd.itemSize.y) > inventorySize.x)
+                    {
+                        Debug.Log("The item is too large for the current row");
+                        break;
+                    }
 
+                    //Fits in flipped size
+                    areaToTest = new Rect(currentYCellIndex + 1, currentXCellIndex + 1, itemToAdd.itemSize.y, itemToAdd.itemSize.x);
+                    isFlipped = true;
 
                 }
+                else
+                {
+                    // Choose the area to test whether it is free:
+                    areaToTest = new Rect(currentXCellIndex + 1, currentYCellIndex + 1, itemToAdd.itemSize.x, itemToAdd.itemSize.y);
+                }
+
 
 
                 foreach (var index in _inventoryItems)
@@ -185,6 +198,7 @@ public class PlayerInventory : MonoBehaviour
 
                 }
                 Debug.Log("Found free space");
+
                 freeCellIndex = new Vector2(currentXCellIndex, currentYCellIndex);
                 return true;
 
