@@ -7,11 +7,12 @@ using UnityEngine;
 
 public struct InventoryItemSlot
 {
-    public Vector2 itemCellIndex { get; set; }
     //How many cells does item take;
-
+    public Vector2 itemCellIndex { get; set; }
     public Item inventoryItem { get; set; }
 
+
+    public bool isRotated;
 }
 
 
@@ -67,9 +68,9 @@ public class PlayerInventory : MonoBehaviour
 
     public bool TryAddNewItem(Item newItem, int quantity)
     {
-        bool isFlipped = false;
+
         Vector2 newItemCellIndex;
-        if (!IsFreeSpaceAvailable(newItem, out newItemCellIndex, out isFlipped))
+        if (!IsFreeSpaceAvailable(newItem, out newItemCellIndex, out bool isFlipped))
         {
             return false;
         }
@@ -80,6 +81,7 @@ public class PlayerInventory : MonoBehaviour
         InventoryItemSlot itemToAdd = new InventoryItemSlot();
         itemToAdd.inventoryItem = newItem;
         itemToAdd.itemCellIndex = newItemCellIndex;
+        itemToAdd.isRotated = isFlipped;
 
         _inventoryItems.Add(itemToAdd);
 
@@ -128,8 +130,7 @@ public class PlayerInventory : MonoBehaviour
             return true;
         }
 
-        Vector2 newItemEndCell;
-        Vector2 newItemStartCell;
+
         bool foundFreeSpace;
 
 
@@ -146,7 +147,7 @@ public class PlayerInventory : MonoBehaviour
                 foundFreeSpace = true;
 
                 //Debug.Log("Testing column. MinCellIndex " + currentXCellIndex + " MaxCellIndex " + newItemEndCell);
-
+                //&itemToAdd.itemSize.magnitude > 1.5
                 // Check whether item is too large for the current row in both original and flipped form
                 if ((currentXCellIndex + itemToAdd.itemSize.x) > inventorySize.x)
                 {
@@ -156,8 +157,9 @@ public class PlayerInventory : MonoBehaviour
                         break;
                     }
 
+                    Debug.Log("Item should fit if flipped");
                     //Fits in flipped size
-                    areaToTest = new Rect(currentYCellIndex + 1, currentXCellIndex + 1, itemToAdd.itemSize.y, itemToAdd.itemSize.x);
+                    areaToTest = new Rect(currentXCellIndex + 1, currentYCellIndex + 1, itemToAdd.itemSize.y, itemToAdd.itemSize.x);
                     isFlipped = true;
 
                 }

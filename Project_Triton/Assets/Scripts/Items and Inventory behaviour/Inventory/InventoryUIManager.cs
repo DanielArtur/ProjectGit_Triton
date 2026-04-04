@@ -91,8 +91,8 @@ public class InventoryUIManager : MonoBehaviour
         //itemUIPos = ItemHolder.transform.InverseTransformPoint(itemUIPos);
 
 
-        //GameObject newItemIcon = Instantiate(ItemIconPrefab, itemUIPos, Quaternion.identity, ItemHolder.transform);
-        //newItemIcon.GetComponent<Image>().sprite = inventoryItem.inventoryItem.itemIcon;
+        //GameObject newItemObject = Instantiate(ItemIconPrefab, itemUIPos, Quaternion.identity, ItemHolder.transform);
+        //newItemObject.GetComponent<Image>().sprite = inventoryItem.inventoryItem.itemIcon;
 
 
 
@@ -106,21 +106,27 @@ public class InventoryUIManager : MonoBehaviour
         float UIPosY = -item.itemCellIndex.y * 100;
 
         Vector2 itemUIPos = new Vector2(UIPosX + anchoredGridPosition.x, UIPosY + anchoredGridPosition.y);
-        GameObject newItemIcon = Instantiate(ItemIconPrefab, Vector2.zero, Quaternion.identity, ItemHolder.transform);
+        GameObject newItemObject = Instantiate(ItemIconPrefab, Vector2.zero, Quaternion.identity, ItemHolder.transform);
 
-        RectTransform itemRectTranform = newItemIcon.GetComponent<RectTransform>();
+        Transform childObject = newItemObject.transform.GetChild(0);
 
-        newItemIcon.GetComponent<Image>().sprite = item.inventoryItem.itemIcon;
 
-        itemRectTranform.anchoredPosition = itemUIPos;
+        RectTransform itemObjectRectTransform = newItemObject.GetComponent<RectTransform>();
+        RectTransform itemIconRectTranform = childObject.GetComponent<RectTransform>();
+
+
+        childObject.GetComponent<Image>().sprite = item.inventoryItem.itemIcon;
+
+        itemObjectRectTransform.anchoredPosition = itemUIPos;
 
         //Test
         Vector2 newSize = new Vector2(item.inventoryItem.itemSize.x * 100, item.inventoryItem.itemSize.y * 100);
-        itemRectTranform.sizeDelta = newSize;
+        itemIconRectTranform.sizeDelta = newSize;
 
         //150 for y because Unity counts from bottom left.
-        Vector2 newPivotPosition = new Vector2(50 / newSize.x, (newSize.y - 50) / newSize.y);
-        itemRectTranform.pivot = newPivotPosition;
+        //Vector2 newPivotPosition = new Vector2(50 / newSize.x, (newSize.y - 50) / newSize.y);
+        Vector2 newPivotPosition = new Vector2(0, 1);
+        itemIconRectTranform.pivot = newPivotPosition;
 
 
 

@@ -691,10 +691,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1941586795}
     m_Modifications:
+    - target: {fileID: 263476481951544540, guid: 1a796de39cfba9e46a17678ad05e9385,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2179338715738088698, guid: 1a796de39cfba9e46a17678ad05e9385,
         type: 3}
       propertyPath: m_Name
       value: InventoryItemIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587608772395162715, guid: 1a796de39cfba9e46a17678ad05e9385,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587608772395162715, guid: 1a796de39cfba9e46a17678ad05e9385,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587608772395162715, guid: 1a796de39cfba9e46a17678ad05e9385,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587608772395162715, guid: 1a796de39cfba9e46a17678ad05e9385,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587608772395162715, guid: 1a796de39cfba9e46a17678ad05e9385,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5061094806232000848, guid: 1a796de39cfba9e46a17678ad05e9385,
         type: 3}
