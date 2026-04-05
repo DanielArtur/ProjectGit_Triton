@@ -125,7 +125,17 @@ public class InventoryUIManager : MonoBehaviour
 
         //150 for y because Unity counts from bottom left.
         //Vector2 newPivotPosition = new Vector2(50 / newSize.x, (newSize.y - 50) / newSize.y);
-        Vector2 newPivotPosition = new Vector2(0, 1);
+
+        Vector2 newPivotPosition;
+
+        if (item.isRotated)
+        {
+            newPivotPosition = Vector2.zero;
+            itemIconRectTranform.eulerAngles = new Vector3(0, 0, -90);
+        }
+
+        else newPivotPosition = new Vector2(0, 1);
+
         itemIconRectTranform.pivot = newPivotPosition;
 
 
