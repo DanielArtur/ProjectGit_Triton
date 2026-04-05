@@ -68,7 +68,7 @@ public class PlayerInventory : MonoBehaviour
 
     public bool TryAddNewItem(Item newItem, int quantity)
     {
-
+        Debug.Log("Next Item: " + newItem.itemName);
         Vector2 newItemCellIndex;
         if (!IsFreeSpaceAvailable(newItem, out newItemCellIndex, out bool isFlipped))
         {
@@ -149,11 +149,12 @@ public class PlayerInventory : MonoBehaviour
                 //Debug.Log("Testing column. MinCellIndex " + currentXCellIndex + " MaxCellIndex " + newItemEndCell);
                 //&itemToAdd.itemSize.magnitude > 1.5
                 // Check whether item is too large for the current row in both original and flipped form
-                if ((currentXCellIndex + itemToAdd.itemSize.x) > inventorySize.x)
+
+                if ((currentXCellIndex + (itemToAdd.itemSize.x - 1)) > (inventorySize.x - 1))
                 {
-                    if ((currentXCellIndex + itemToAdd.itemSize.y) > inventorySize.x)
+                    if ((currentXCellIndex + (itemToAdd.itemSize.y - 1)) > (inventorySize.x - 1) & ((currentYCellIndex + (itemToAdd.itemSize.x - 1)) > (inventorySize.y - 1)))
                     {
-                        Debug.Log("The item is too large for the current row");
+                        Debug.Log("The item is too large for the current row/column even in flipped form");
                         break;
                     }
 
@@ -176,10 +177,11 @@ public class PlayerInventory : MonoBehaviour
                     // Vector2 testItemStart = index.itemCellIndex;
                     // Vector2 testItemEnd = new Vector2(index.itemCellIndex.x + ((int)index.inventoryItem.itemSize.x - 1), index.itemCellIndex.x + ((int)index.inventoryItem.itemSize.y - 1));
                     //Debug.Log("Running iteratrion. TestItemStartPoint and testItemEnd: " + index.itemCellIndex.x + " " + testItemEnd + " While currentXCellIndex is " + currentXCellIndex + " and MaxCellIndex is " + newItemEndCell);
+                    Rect testItem;
 
-                    Rect testItem = new Rect(index.itemCellIndex.x + 1, index.itemCellIndex.y + 1, index.inventoryItem.itemSize.x, index.inventoryItem.itemSize.x);
+                    if (index.isRotated) testItem = new Rect(index.itemCellIndex.x + 1, index.itemCellIndex.y + 1, index.inventoryItem.itemSize.y, index.inventoryItem.itemSize.x);
 
-
+                    else testItem = new Rect(index.itemCellIndex.x + 1, index.itemCellIndex.y + 1, index.inventoryItem.itemSize.x, index.inventoryItem.itemSize.y);
 
                     if (areaToTest.Overlaps(testItem))
                     {

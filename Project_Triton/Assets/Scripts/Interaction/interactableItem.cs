@@ -40,7 +40,7 @@ public class interactableItem : MonoBehaviour, IInteractable
             return;
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
 
